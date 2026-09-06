@@ -3,7 +3,7 @@
 ## Account Preparation
 
 Register a Cloudflare account at https://dash.cloudflare.com and add your domain.
-<img src="../../public/images/en/action/1.png" class="article-img">
+<img src="../../public/images/action/1.png" class="article-img">
 
 
 ## Create the Project

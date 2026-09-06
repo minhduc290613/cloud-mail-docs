@@ -1,11 +1,5 @@
 # Dashboard Deployment
 
-## Account Preparation
-
-Register a Cloudflare account at https://dash.cloudflare.com and add your domain.
-<img src="../../public/images/action/1.png" class="article-img">
-
-
 ## Create the Project
 
 1. Fork or clone the repository to your own GitHub account: [https://github.com/maillab/cloud-mail](https://github.com/maillab/cloud-mail)
@@ -14,15 +8,15 @@ Register a Cloudflare account at https://dash.cloudflare.com and add your domain
 
 2. Create a new Worker project
 
-<img src="../../public/images/dashboard/1.png" class="article-img" />
+<img src="../../public/images/en/dashboard/1.png" class="article-img" />
 
 3. Choose **Import from GitHub**
 
-<img src="../../public/images/dashboard/2.png" class="article-img" />
+<img src="../../public/images/en/dashboard/2.png" class="article-img" />
 
 4. Set the directory to `mail-worker` and deploy the project
 
-<img src="../../public/images/dashboard/3.png" class="article-img" />
+<img src="../../public/images/en/dashboard/3.png" class="article-img" />
 
 ## Configure Environment Variables
 
@@ -32,23 +26,23 @@ Register a Cloudflare account at https://dash.cloudflare.com and add your domain
 | admin         |     ✅    | Administrator email address (e.g., `admin@example.com`)                                   |
 | jwt_secret    |     ✅    | JWT secret key. Use any random string; do not include special characters                  |
 
-<img src="../../public/images/dashboard/5.png" class="article-img" />
+<img src="../../public/images/en/dashboard/5.png" class="article-img" />
 
 ## Bind Databases
 
 1. Create the KV and D1 databases
 
-<img src="../../public/images/dashboard/4-4.png" class="article-img" />
+<img src="../../public/images/en/dashboard/4-4.png" class="article-img" />
 
 2. Add bindings. <span style="color: red">The variable names must be `kv` and `db`</span>
 
-<img src="../../public/images/dashboard/4.png" class="article-img" />
+<img src="../../public/images/en/dashboard/4.png" class="article-img" />
 
 ## Configure Email Forwarding
 
-<img src="../../public/images/dashboard/6.png" class="article-img" />
-<img src="../../public/images/dashboard/7.png" class="article-img" />
-<img src="../../public/images/dashboard/8.png" class="article-img" />
+<img src="../../public/images/en/dashboard/6.png" class="article-img" />
+<img src="../../public/images/en/dashboard/7.png" class="article-img" />
+<img src="../../public/images/en/dashboard/8.png" class="article-img" />
 
 ## Log In to the Website
 

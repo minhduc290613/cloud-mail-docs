@@ -5,6 +5,10 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   Deploy-cloud-mail-docs:
     name: 🏗️ Build and Deploy
@@ -15,15 +19,15 @@ jobs:
 
     steps:
       - name: 🚚 检出代码仓库 / Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: ⚙ 设置 pnpm / Set up pnpm
-        uses: pnpm/action-setup@v4.1.0
+        uses: pnpm/action-setup@v6
         with:
           version: 9
 
       - name: ⚙ 设置 Node.js / Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "22"
           cache: "pnpm"
@@ -46,8 +50,33 @@ jobs:
           fi
 
       - name: 🗑️ 删除运行记录 / Delete workflow runs
-        uses: GitRML/delete-workflow-runs@main
+        uses: actions/github-script@v9
         continue-on-error: true
         with:
-          retain_days: '1'
-          keep_minimum_runs: '0'
+          script: |
+            const retainDays = 1
+            const cutoff = Date.now() - retainDays * 24 * 60 * 60 * 1000
+            const runs = await github.paginate(
+              github.rest.actions.listWorkflowRunsForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                per_page: 100,
+              },
+            )
+
+            for (const run of runs) {
+              if (run.id === context.runId || new Date(run.created_at).getTime() >= cutoff) {
+                continue
+              }
+
+              try {
+                await github.rest.actions.deleteWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: run.id,
+                })
+              } catch (error) {
+                core.warning(`Failed to delete workflow run ${run.id}: ${error.message}`)
+              }
+            }

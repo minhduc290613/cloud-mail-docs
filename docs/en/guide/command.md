@@ -9,8 +9,8 @@ A Cloudflare account (a domain must be added to the account)
 
 **Clone the project locally**
 ``` shell
-git clone https://github.com/maillab/cloud-mail #拉取代码
-cd cloud-mail/mail-worker #进入worker目录
+git clone https://github.com/maillab/cloud-mail
+cd cloud-mail/mail-worker
 ```
 
 **Install dependencies**

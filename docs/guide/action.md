@@ -9,12 +9,8 @@
 2. 添加对应权限
 <img src="../public/images/action/5.png" class="article-img">
 
-3. 复制API令牌
+3. 复制账户ID和API令牌
 <img src="../public/images/action/6.png" class="article-img">
-
-4. 复制账户ID
-<img src="../public/images/action/7.png" class="article-img">
-
 
 ## 准备环境
 

@@ -1,17 +1,16 @@
 
 ## Description
 
-Cloud Mail 的文档仓库
+Cloud Mail 
 
 ## Preview
 
-Live Preview: [https://doc.skymail.ink](https://doc.skymail.ink)
-
+Live Preview:
 ## Getting Started
 
 ```bash
 # Clone the repository
-git clone https://github.com/maillab/cloud-mail-docs.git
+git clone https://github.com/minhduc290613/cloud-mail-docs.git
 
 # Go into the folder
 cd cloud-mail-docs

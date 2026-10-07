@@ -9,57 +9,57 @@ export default defineConfig({
                     { rel: 'icon', type: 'image/x-icon', href: '/images/logo.png' }
                 ]
             ],
-            label: '中文简体',
-            lang: 'zh',
+            label: 'Tiếng Việt',
+            lang: 'vi',
             themeConfig: {
                 siteTitle: 'Cloud Mail',
                 logo: '/images/logo.png',
                 nav: [
-                    {text: '首页', link: '/'},
-                    {text: '文档', link: '/preview/description'},
-                    {text: '捐助 ❤️', link: '/support'},
-                    {text: 'v3.3.0', link: 'https://github.com/maillab/cloud-mail/releases'}
+                    {text: 'Trang chủ', link: '/'},
+                    {text: 'Tài liệu', link: '/preview/description'},
+                    {text: 'Ủng hộ ❤️', link: '/support'},
+                    {text: 'Release', link: 'https://github.com/minhduc290613/cloud-mail/releases'}
                 ],
 
                 sidebar: [
                     {
-                        text: '项目预览',
+                        text: 'Tổng quan dự án',
                         items: [
-                            {text: '项目介绍', link: '/preview/description'},
-                            {text: '更新日志', link: 'https://github.com/maillab/cloud-mail/releases'},
+                            {text: 'Giới thiệu dự án', link: '/preview/description'},
+                            {text: 'Nhật ký cập nhật', link: 'https://github.com/minhduc290613/cloud-mail/releases'},
                         ]
                     },
                     {
-                        text: '部署教程',
+                        text: 'Hướng dẫn triển khai',
                         items: [
-                            {text: '界面部署', link: '/guide/dashboard'},
-                            {text: 'Action 部署', link: '/guide/action'},
-                            {text: '命令部署', link: '/guide/command'},
-                            {text: '其他变量', link: '/guide/environment'},
-                            {text: '项目更新', link: '/guide/update'}
+                            {text: 'Triển khai giao diện', link: '/guide/dashboard'},
+                            {text: 'Triển khai Action', link: '/guide/action'},
+                            {text: 'Triển khai dòng lệnh', link: '/guide/command'},
+                            {text: 'Biến môi trường khác', link: '/guide/environment'},
+                            {text: 'Cập nhật dự án', link: '/guide/update'}
                         ]
                     },
                     {
-                        text: '系统设置',
+                        text: 'Cài đặt hệ thống',
                         items: [
-                            {text: '邮件发送', link: '/system/sending'},
-                            {text: '对象存储', link: '/system/object-storage'},
+                            {text: 'Gửi email', link: '/system/sending'},
+                            {text: 'Lưu trữ đối tượng', link: '/system/object-storage'},
                             {text: 'Turnstile', link: '/system/turnstile'},
-                            {text: '邮件转发', link: '/system/forward'},
-                            {text: 'Oauth2', link: '/oauth2/oauth2.md'},
+                            {text: 'Chuyển tiếp email', link: '/system/forward'},
+                            {text: 'OAuth2', link: '/oauth2/oauth2.md'},
                         ]
                     },
                     {
-                        text: 'API 接口',
+                        text: 'Giao diện API',
                         items: [
-                            {text: '接口文档', link: '/api/api-doc'},
+                            {text: 'Tài liệu API', link: '/api/api-doc'},
                         ]
                     },
                     {
-                        text: '捐助 ❤️', link: '/support'
+                        text: 'Ủng hộ ❤️', link: '/support'
                     },
                     {
-                        text: '联系', link: '/contact'
+                        text: 'Liên hệ', link: '/contact'
                     }
                 ],
 
@@ -68,8 +68,8 @@ export default defineConfig({
                 },
 
                 socialLinks: [
-                    {icon: 'github', link: 'https://github.com/maillab/cloud-mail'},
-                    {icon: 'telegram', link: 'https://t.me/cloud_mail_tg'}
+                    {icon: 'github', link: 'https://github.com/minhduc290613/cloud-mail'},
+                    {icon: 'telegram', link: 'https://t.me/minhduc290613'}
                 ]
             }
         },
@@ -90,7 +90,7 @@ export default defineConfig({
                     { text: 'Home', link: '/en/' },
                     { text: 'Document', link: '/en/preview/description' },
                     { text: 'Sponsor ️ ❤️', link: '/en/support' },
-                    {text: 'v3.3.0', link: 'https://github.com/maillab/cloud-mail/releases'}
+                    {text: 'Release', link: 'https://github.com/minhduc290613/cloud-mail/releases'}
                 ],
 
                 sidebar: [
@@ -98,7 +98,7 @@ export default defineConfig({
                         text: 'Project Preview',
                         items: [
                             { text: 'Description', link: '/en/preview/description' },
-                            { text: 'Changelog', link: 'https://github.com/maillab/cloud-mail/releases' },
+                            { text: 'Changelog', link: 'https://github.com/minhduc290613/cloud-mail/releases' },
                         ]
                     },
                     {
@@ -140,8 +140,8 @@ export default defineConfig({
                 },
 
                 socialLinks: [
-                    { icon: 'github', link: 'https://github.com/maillab/cloud-mail' },
-                    { icon: 'telegram', link: 'https://t.me/cloud_mail_tg'}
+                    { icon: 'github', link: 'https://github.com/minhduc290613/cloud-mail' },
+                    { icon: 'telegram', link: 'https://t.me/minhduc290613'}
                 ]
             }
         }

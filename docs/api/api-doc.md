@@ -1,28 +1,28 @@
-# 接口文档
+# Tài liệu API
 
 ::: tip
-除「登录」外，接口需在请求头 `Authorization` 中填入登录返回的身份令牌（不要加 Bearer 前缀）。管理类接口需要对应权限，管理员账号不受限制。
+Ngoại trừ API「Đăng nhập」, các API còn lại đều yêu cầu truyền token xác thực nhận được sau khi đăng nhập vào header `Authorization` (không thêm tiền tố Bearer). Các API quản trị yêu cầu quyền tương ứng, tài khoản quản trị viên không bị giới hạn.
 :::
 
-## 登录接口
+## API Đăng nhập
 
-### 登录
+### Đăng nhập
 
-**接口说明**：使用邮箱和密码登录，返回身份令牌
+**Mô tả API**: Đăng nhập bằng email và mật khẩu, trả về token xác thực
 
-**接口地址**：`POST /api/login`
+**Đường dẫn API**: `POST /api/login`
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数       | 类型     | 默认值 | 必填  | 说明                            |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | -------- | ------ | --- | --- | ----------------------------- |
-| email    | string |     | 是   | 完整邮箱地址，例如 `admin@example.com` |
-| password | string |     | 是   | 邮箱密码                          |
+| email | string | | Có | Địa chỉ email đầy đủ, ví dụ `admin@example.com` |
+| password | string | | Có | Mật khẩu email |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
-curl -X POST "https://skymail.ink/api/login" \
+curl -X POST "https://mail.protechvn.io.vn/api/login" \
   -H "Content-Type: application/json" \
   -d '{
     "email": "admin@example.com",
@@ -30,7 +30,7 @@ curl -X POST "https://skymail.ink/api/login" \
   }'
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -42,87 +42,87 @@ curl -X POST "https://skymail.ink/api/login" \
 }
 ```
 
-### 当前用户信息
+### Thông tin người dùng hiện tại
 
-**接口说明**：获取当前登录用户的账号、权限身份和权限列表
+**Mô tả API**: Lấy thông tin tài khoản, vai trò và danh sách quyền hạn của người dùng đang đăng nhập
 
-**接口地址**：`GET /api/my/loginUserInfo`
+**Đường dẫn API**: `GET /api/my/loginUserInfo`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X GET "https://skymail.ink/api/my/loginUserInfo" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
   "code": 200,
   "message": "success",
   "data": {
-      "userId": 1,                          // 用户 id
-      "email": "admin@example.com",         // 用户邮箱
-      "name": "admin",                      // 用户名
-      "type": 0,                            // 权限身份 id（管理员为 0）
-      "sendCount": 0,                       // 已发件次数
-      "permKeys": ["*"],                    // 权限列表，管理员为 ["*"]
+      "userId": 1,                          // ID người dùng
+      "email": "admin@example.com",         // Email người dùng
+      "name": "admin",                      // Tên người dùng
+      "type": 0,                            // ID vai trò quyền hạn (quản trị viên là 0)
+      "sendCount": 0,                       // Số lượt thư đã gửi
+      "permKeys": ["*"],                    // Danh sách quyền hạn, quản trị viên là ["*"]
       "account": {
-          "accountId": 1,                   // 邮箱账号 id
+          "accountId": 1,                   // ID hộp thư email
           "email": "admin@example.com",
           "name": "admin"
       },
       "role": {
-          "name": "admin",                  // 权限身份名
-          "sendCount": 0,                   // 发件次数上限，0 为不限制
-          "sendType": "count",              // 发件限制类型（count 总量，day 每日）
-          "accountCount": 0                 // 可添加邮箱数量，0 为不限制
+          "name": "admin",                  // Tên vai trò
+          "sendCount": 0,                   // Giới hạn lượt gửi, 0 là không giới hạn
+          "sendType": "count",              // Loại giới hạn gửi (count: tổng số, day: hàng ngày)
+          "accountCount": 0                 // Số lượng hộp thư có thể thêm, 0 là không giới hạn
       }
   }
 }
 ```
 
-## 用户-邮件接口
+## Người dùng - Email
 
-### 邮件列表
+### Danh sách email
 
-**接口说明**：查询当前登录用户的邮件，使用 `emailId` 游标分页
+**Mô tả API**: Truy vấn email của người dùng hiện tại, sử dụng phân trang con trỏ `emailId`
 
-**接口地址**：`GET /api/email/list`
+**Đường dẫn API**: `GET /api/email/list`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数         | 类型      | 默认值 | 必填  | 说明                                                 |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | ---------- | ------- | --- | --- | -------------------------------------------------- |
-| accountId  | integer |     | 是   | 邮箱账号 id                                            |
-| type       | integer | 0   | 否   | 邮件类型（0 收件，1 发件）                                    |
-| emailId    | integer |     | 否   | 游标邮件 id，首次查询可不传。`timeSort` 为 0 时查更早的邮件，为 1 时查更晚的邮件 |
-| size       | integer | 10  | 否   | 每页数量，最大 50                                         |
-| timeSort   | integer |     | 否   | 时间排序（0 最新，1 最旧）                                    |
-| allReceive | integer |     | 否   | 是否查询该用户全部邮箱（0 否，1 是）。不传则使用该邮箱自己的全部收取设置             |
-| full       | integer | 1   | 否   | 是否返回完整字段（0 摘要，1 完整正文和附件）                           |
+| accountId | integer | | Có | ID hộp thư email |
+| type | integer | 0 | Không | Loại email (0: hộp thư đến, 1: đã gửi) |
+| emailId | integer | | Không | ID email con trỏ, truy vấn lần đầu có thể bỏ qua. Khi `timeSort` = 0 sẽ lấy email cũ hơn, khi = 1 sẽ lấy email mới hơn |
+| size | integer | 10 | Không | Số lượng mỗi trang, tối đa 50 |
+| timeSort | integer | | Không | Sắp xếp thời gian (0: mới nhất, 1: cũ nhất) |
+| allReceive | integer | | Không | Có truy vấn tất cả hộp thư của người dùng hay không (0: không, 1: có). Mặc định dùng cài đặt nhận toàn bộ của hộp thư |
+| full | integer | 1 | Không | Có trả về đầy đủ các trường hay không (0: tóm tắt, 1: đầy đủ nội dung và tệp đính kèm) |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X GET "https://skymail.ink/api/email/list?accountId=1&size=10" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -137,21 +137,21 @@ curl -X GET "https://skymail.ink/api/email/list?accountId=1&size=10" \
     },
     "list": [
       {
-        "emailId": 999,                       // 邮件 id
-        "sendEmail": "hello@example.com",     // 发件人邮箱
-        "name": "hello",                      // 发件人名字
-        "subject": "Hello word",              // 邮件主题
-        "toEmail": "admin@example.com",       // 收件人邮箱
-        "accountId": 1,                       // 邮箱账号 id
-        "type": 0,                            // 邮件类型（0 收件，1 发件）
-        "status": 0,                          // 邮件状态（0 收件，1 已发送，2 已送达，3 退信，4 投诉，5 延迟，6 保存中，7 无人收件，8 失败）
-        "unread": 0,                          // 是否未读（0 未读，1 已读）
-        "isDel": 0,                           // 是否删除（0 正常，1 已删除）
-        "isStar": 0,                          // 是否星标（0 否，1 是）
-        "content": "<div>Hello word</div>",   // 邮件 HTML，full=1 时返回
-        "text": "Hello word",                 // 邮件纯文本
-        "createTime": "2099-12-30 23:59:59",  // 接收或发送时间（UTC）
-        "attList": [                          // 附件列表，full=1 时返回
+        "emailId": 999,                       // ID email
+        "sendEmail": "hello@example.com",     // Email người gửi
+        "name": "hello",                      // Tên người gửi
+        "subject": "Hello word",              // Tiêu đề email
+        "toEmail": "admin@example.com",       // Email người nhận
+        "accountId": 1,                       // ID hộp thư email
+        "type": 0,                            // Loại email (0: nhận, 1: gửi)
+        "status": 0,                          // Trạng thái email (0: nhận, 1: đã gửi, 2: đã chuyển giao, 3: bị trả lại, 4: khiếu nại, 5: trễ, 6: đang lưu, 7: không người nhận, 8: thất bại)
+        "unread": 0,                          // Trạng thái đọc (0: chưa đọc, 1: đã đọc)
+        "isDel": 0,                           // Trạng thái xóa (0: bình thường, 1: đã xóa)
+        "isStar": 0,                          // Gắn sao (0: không, 1: có)
+        "content": "<div>Hello word</div>",   // Nội dung HTML email, trả về khi full=1
+        "text": "Hello word",                 // Nội dung văn bản thuần của email
+        "createTime": "2099-12-30 23:59:59",  // Thời gian nhận hoặc gửi (UTC)
+        "attList": [                          // Danh sách tệp đính kèm, trả về khi full=1
           {
             "attId": 1,
             "filename": "file.txt",
@@ -165,37 +165,37 @@ curl -X GET "https://skymail.ink/api/email/list?accountId=1&size=10" \
 }
 ```
 
-### 发送邮件
+### Gửi email
 
-**接口说明**：使用当前用户的邮箱账号发件。附件最多 10 个，正文内嵌图片最多 10 张
+**Mô tả API**: Gửi email bằng tài khoản hộp thư của người dùng hiện tại. Tối đa 10 tệp đính kèm, tối đa 10 hình ảnh nhúng trong nội dung
 
-**接口地址**：`POST /api/email/send`
+**Đường dẫn API**: `POST /api/email/send`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数             | 类型                   | 默认值 | 必填  | 说明                                  |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | -------------- | -------------------- | --- | --- | ----------------------------------- |
-| accountId      | integer              |     | 是   | 发件邮箱账号 id                           |
-| receiveEmail   | array &lt;string&gt; |     | 是   | 收件人邮箱列表                             |
-| subject        | string               |     | 是   | 邮件主题                                |
-| content        | string               |     | 是   | 邮件 HTML                             |
-| text           | string               |     | 否   | 邮件纯文本                               |
-| name           | string               |     | 否   | 发件人名字，不填自动截取邮箱前缀                    |
-| sendType       | string               |     | 否   | 发件类型（空 新邮件，`reply` 回复，`forward` 转发） |
-| emailId        | integer              |     | 否   | 原邮件 id，`sendType` 为 `reply` 时必填     |
-| attachments    | array &lt;object&gt; |     | 否   | 附件列表                                |
-| └─ filename    | string               |     | 是   | 文件名                                 |
-| └─ content     | string               |     | 是   | 文件内容，Base64                         |
-| └─ contentType | string               |     | 否   | 文件 MIME 类型                          |
-| └─ size        | integer              |     | 否   | 文件大小                                |
+| accountId | integer | | Có | ID hộp thư người gửi |
+| receiveEmail | array &lt;string&gt; | | Có | Danh sách email người nhận |
+| subject | string | | Có | Tiêu đề email |
+| content | string | | Có | Nội dung HTML email |
+| text | string | | Không | Văn bản thuần của email |
+| name | string | | Không | Tên người gửi, để trống sẽ tự lấy tiền tố email |
+| sendType | string | | Không | Loại gửi thư (để trống: thư mới, `reply`: trả lời, `forward`: chuyển tiếp) |
+| emailId | integer | | Không | ID email gốc, bắt buộc khi `sendType` là `reply` |
+| attachments | array &lt;object&gt; | | Không | Danh sách tệp đính kèm |
+| └─ filename | string | | Có | Tên tệp tin |
+| └─ content | string | | Có | Nội dung tệp tin (chuỗi Base64) |
+| └─ contentType | string | | Không | Kiểu MIME của tệp tin |
+| └─ size | integer | | Không | Kích thước tệp tin |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X POST "https://skymail.ink/api/email/send" \
@@ -219,7 +219,7 @@ curl -X POST "https://skymail.ink/api/email/send" \
   }'
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -227,14 +227,14 @@ curl -X POST "https://skymail.ink/api/email/send" \
   "message": "success",
   "data": [
     {
-      "emailId": 999,                         // 邮件 id
-      "sendEmail": "admin@example.com",       // 发件人邮箱
-      "name": "admin",                        // 发件人名字
-      "subject": "Hello word",                // 邮件主题
-      "content": "<div>Hello word</div>",     // 邮件 HTML
-      "text": "Hello word",                   // 邮件纯文本
-      "type": 1,                              // 邮件类型（1 发件）
-      "status": 1,                            // 邮件状态（1 已发送，2 已送达）
+      "emailId": 999,                         // ID email
+      "sendEmail": "admin@example.com",       // Email người gửi
+      "name": "admin",                        // Tên người gửi
+      "subject": "Hello word",                // Tiêu đề email
+      "content": "<div>Hello word</div>",     // Nội dung HTML email
+      "text": "Hello word",                   // Văn bản thuần email
+      "type": 1,                              // Loại email (1: đã gửi)
+      "status": 1,                            // Trạng thái email (1: đã gửi, 2: đã chuyển giao)
       "accountId": 1,
       "userId": 1,
       "createTime": "2099-12-30 23:59:59",
@@ -244,32 +244,32 @@ curl -X POST "https://skymail.ink/api/email/send" \
 }
 ```
 
-### 删除邮件
+### Xóa email
 
-**接口说明**：删除当前用户的邮件。默认标记删除，系统开启同步删除时为永久删除
+**Mô tả API**: Xóa email của người dùng hiện tại. Mặc định là đánh dấu đã xóa; khi hệ thống bật xóa đồng bộ sẽ là xóa vĩnh viễn
 
-**接口地址**：`DELETE /api/email/delete`
+**Đường dẫn API**: `DELETE /api/email/delete`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数       | 类型     | 默认值 | 必填  | 说明              |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | -------- | ------ | --- | --- | --------------- |
-| emailIds | string |     | 是   | 邮件 id，多个用英文逗号分隔 |
+| emailIds | string | | Có | ID email, nhiều ID phân cách bằng dấu phẩy |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X DELETE "https://skymail.ink/api/email/delete?emailIds=1,2" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -279,36 +279,36 @@ curl -X DELETE "https://skymail.ink/api/email/delete?emailIds=1,2" \
 }
 ```
 
-## 用户-邮箱地址
+## Người dùng - Hộp thư
 
-### 邮箱列表
+### Danh sách hộp thư
 
-**接口说明**：查询当前登录用户的邮箱地址，按置顶顺序分页
+**Mô tả API**: Truy vấn danh sách hộp thư của người dùng hiện tại, phân trang theo thứ tự ghim/sắp xếp
 
-**接口地址**：`GET /api/account/list`
+**Đường dẫn API**: `GET /api/account/list`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数        | 类型      | 默认值 | 必填  | 说明                                               |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | --------- | ------- | --- | --- | ------------------------------------------------ |
-| size      | integer |     | 否   | 每页数量，最大 30                                       |
-| accountId | integer |     | 否   | 游标邮箱 id，首次查询可不传                                  |
-| lastSort  | integer |     | 否   | 游标排序值，首次查询可不传。下一页传入上一页最后一条的 `sort` 和 `accountId` |
+| size | integer | | Không | Số lượng mỗi trang, tối đa 30 |
+| accountId | integer | | Không | ID hộp thư con trỏ, truy vấn lần đầu có thể bỏ qua |
+| lastSort | integer | | Không | Giá trị sắp xếp con trỏ, truy vấn lần đầu có thể bỏ qua. Trang tiếp theo truyền `sort` và `accountId` của mục cuối trang trước |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X GET "https://skymail.ink/api/account/list?size=15" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -316,39 +316,39 @@ curl -X GET "https://skymail.ink/api/account/list?size=15" \
   "message": "success",
   "data": [
     {
-      "accountId": 1,                         // 邮箱账号 id
-      "email": "admin@example.com",           // 邮箱地址
-      "name": "admin",                        // 邮箱名称
-      "userId": 1,                            // 所属用户 id
-      "allReceive": 0,                        // 是否全部收取（0 否，1 是）
-      "sort": 0,                              // 排序值，越大越靠前
-      "isDel": 0,                             // 是否删除（0 正常，1 已删除）
-      "createTime": "2099-12-30 23:59:59"     // 创建时间
+      "accountId": 1,                         // ID hộp thư
+      "email": "admin@example.com",           // Địa chỉ email
+      "name": "admin",                        // Tên hộp thư
+      "userId": 1,                            // ID người dùng sở hữu
+      "allReceive": 0,                        // Nhận toàn bộ (0: không, 1: có)
+      "sort": 0,                              // Thứ tự sắp xếp, số càng lớn càng ưu tiên hiển thị trước
+      "isDel": 0,                             // Trạng thái xóa (0: bình thường, 1: đã xóa)
+      "createTime": "2099-12-30 23:59:59"     // Thời gian tạo
     }
   ]
 }
 ```
 
-### 添加邮箱
+### Thêm hộp thư
 
-**接口说明**：为当前用户添加邮箱地址。邮箱域名必须是已配置的邮箱域名，不能添加已存在或已注销的地址
+**Mô tả API**: Thêm địa chỉ hộp thư cho người dùng hiện tại. Tên miền email phải nằm trong danh sách đã cấu hình, không thể thêm địa chỉ đã tồn tại hoặc đã hủy
 
-**接口地址**：`POST /api/account/add`
+**Đường dẫn API**: `POST /api/account/add`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数    | 类型     | 默认值 | 必填  | 说明                            |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | ----- | ------ | --- | --- | ----------------------------- |
-| email | string |     | 是   | 完整邮箱地址，例如 `hello@example.com` |
-| token | string |     | 否   | 人机验证 token，系统开启添加邮箱验证时必填      |
+| email | string | | Có | Địa chỉ email đầy đủ, ví dụ `hello@example.com` |
+| token | string | | Không | Token xác minh người máy, bắt buộc khi hệ thống bật tính năng xác minh thêm hộp thư |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X POST "https://skymail.ink/api/account/add" \
@@ -359,52 +359,52 @@ curl -X POST "https://skymail.ink/api/account/add" \
   }'
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
   "code": 200,
   "message": "success",
   "data": {
-    "accountId": 2,                           // 邮箱账号 id
-    "email": "hello@example.com",             // 邮箱地址
-    "name": "hello",                          // 邮箱名称，自动截取邮箱前缀
+    "accountId": 2,                           // ID hộp thư
+    "email": "hello@example.com",             // Địa chỉ email
+    "name": "hello",                          // Tên hộp thư, tự động cắt theo tiền tố email
     "userId": 1,
     "allReceive": 0,
     "sort": 0,
     "isDel": 0,
     "createTime": "2099-12-30 23:59:59",
-    "addVerifyOpen": false                    // 下次添加是否需要人机验证
+    "addVerifyOpen": false                    // Lần thêm tiếp theo có cần xác minh người máy không
   }
 }
 ```
 
-### 删除邮箱
+### Xóa hộp thư
 
-**接口说明**：删除当前用户的邮箱。不能删除登录主邮箱。默认标记删除，系统开启同步删除时为永久删除
+**Mô tả API**: Xóa hộp thư của người dùng hiện tại. Không thể xóa hộp thư chính đăng nhập. Mặc định là đánh dấu đã xóa; khi hệ thống bật xóa đồng bộ sẽ là xóa vĩnh viễn
 
-**接口地址**：`DELETE /api/account/delete`
+**Đường dẫn API**: `DELETE /api/account/delete`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数        | 类型      | 默认值 | 必填  | 说明      |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | --------- | ------- | --- | --- | ------- |
-| accountId | integer |     | 是   | 邮箱账号 id |
+| accountId | integer | | Có | ID hộp thư |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X DELETE "https://skymail.ink/api/account/delete?accountId=2" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -414,39 +414,39 @@ curl -X DELETE "https://skymail.ink/api/account/delete?accountId=2" \
 }
 ```
 
-## 管理-用户列表
+## Quản trị viên - Quản lý người dùng
 
-### 用户列表
+### Danh sách người dùng
 
-**接口说明**：分页查询用户，可按邮箱、状态、删除状态筛选
+**Mô tả API**: Truy vấn danh sách người dùng theo phân trang, có thể lọc theo email, trạng thái, trạng thái xóa
 
-**接口地址**：`GET /api/user/list`
+**Đường dẫn API**: `GET /api/user/list`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数       | 类型      | 默认值   | 必填  | 说明                                              |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | -------- | ------- | ----- | --- | ----------------------------------------------- |
-| num      | integer | 1   | 否   | 页码                                              |
-| size     | integer | 50  | 否   | 每页数量，最大 50                                     |
-| email    | string  |       | 否   | 邮箱，前缀模糊匹配                                       |
-| timeSort | integer |       | 否   | 时间排序（0 最新，1 最旧）                                 |
-| status   | integer |       | 否   | 用户状态（0 正常，1 禁用）。传 0 或 1 时只返回未删除用户，不传或 -1 不按状态过滤 |
-| isDel    | integer |       | 否   | 是否删除（0 正常，1 已删除）                                |
+| num | integer | 1 | Không | Số trang |
+| size | integer | 50 | Không | Số lượng mỗi trang, tối đa 50 |
+| email | string | | Không | Email, tìm kiếm mờ theo tiền tố |
+| timeSort | integer | | Không | Sắp xếp theo thời gian (0: mới nhất, 1: cũ nhất) |
+| status | integer | | Không | Trạng thái người dùng (0: bình thường, 1: bị khóa). Truyền 0 hoặc 1 chỉ trả về người dùng chưa bị xóa, không truyền hoặc -1 không lọc theo trạng thái |
+| isDel | integer | | Không | Trạng thái xóa (0: bình thường, 1: đã xóa) |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X GET "https://skymail.ink/api/user/list?num=1&size=50" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -456,34 +456,34 @@ curl -X GET "https://skymail.ink/api/user/list?num=1&size=50" \
     "total": 1,
     "list": [
       {
-        "userId": 1,                          // 用户 id
-        "email": "admin@example.com",         // 用户邮箱
-        "type": 0,                            // 权限身份 id（管理员为 0）
-        "status": 0,                          // 用户状态（0 正常，1 禁用）
-        "isDel": 0,                           // 是否删除（0 正常，1 已删除）
-        "sendCount": 0,                       // 已发件次数
-        "createTime": "2099-12-30 23:59:59",  // 注册时间
-        "activeTime": "2099-12-30 23:59:59",  // 最近活跃时间
-        "createIp": "127.0.0.1",              // 注册 IP
-        "activeIp": "127.0.0.1",              // 最近活跃 IP
-        "os": "Windows",                      // 操作系统
-        "browser": "Chrome",                  // 浏览器
-        "device": "Desktop",                  // 设备
-        "receiveEmailCount": 10,              // 收件数量
-        "sendEmailCount": 2,                  // 发件数量
-        "accountCount": 1,                    // 邮箱数量
-        "delReceiveEmailCount": 0,            // 已删除收件数量
-        "delSendEmailCount": 0,               // 已删除发件数量
-        "delAccountCount": 0,                 // 已删除邮箱数量
-        "username": null,                     // 第三方登录用户名
-        "name": null,                         // 第三方登录昵称
-        "avatar": null,                       // 第三方登录头像
-        "platform": null,                     // 第三方登录平台
-        "trustLevel": null,                   // 第三方登录信任等级
+        "userId": 1,                          // ID người dùng
+        "email": "admin@example.com",         // Email người dùng
+        "type": 0,                            // ID vai trò quyền hạn (quản trị viên là 0)
+        "status": 0,                          // Trạng thái người dùng (0: bình thường, 1: bị khóa)
+        "isDel": 0,                           // Trạng thái xóa (0: bình thường, 1: đã xóa)
+        "sendCount": 0,                       // Số lượt thư đã gửi
+        "createTime": "2099-12-30 23:59:59",  // Thời gian đăng ký
+        "activeTime": "2099-12-30 23:59:59",  // Hoạt động gần nhất
+        "createIp": "127.0.0.1",              // IP đăng ký
+        "activeIp": "127.0.0.1",              // IP hoạt động gần nhất
+        "os": "Windows",                      // Hệ điều hành
+        "browser": "Chrome",                  // Trình duyệt
+        "device": "Desktop",                  // Thiết bị
+        "receiveEmailCount": 10,              // Số thư đã nhận
+        "sendEmailCount": 2,                  // Số thư đã gửi
+        "accountCount": 1,                    // Số lượng hộp thư
+        "delReceiveEmailCount": 0,            // Số thư nhận đã xóa
+        "delSendEmailCount": 0,               // Số thư gửi đã xóa
+        "delAccountCount": 0,                 // Số lượng hộp thư đã xóa
+        "username": null,                     // Tên người dùng đăng nhập bên thứ ba
+        "name": null,                         // Biệt danh đăng nhập bên thứ ba
+        "avatar": null,                       // Ảnh đại diện đăng nhập bên thứ ba
+        "platform": null,                     // Nền tảng đăng nhập bên thứ ba
+        "trustLevel": null,                   // Cấp độ tin cậy đăng nhập bên thứ ba
         "sendAction": {
-          "hasPerm": true,                    // 是否有发件权限
-          "sendType": "count",                // 发件限制类型（count 总量，day 每日）
-          "sendCount": 0                      // 发件次数上限，0 为不限制
+          "hasPerm": true,                    // Có quyền gửi thư không
+          "sendType": "count",                // Loại giới hạn gửi (count: tổng số, day: hàng ngày)
+          "sendCount": 0                      // Giới hạn lượt gửi, 0 là không giới hạn
         }
       }
     ]
@@ -491,26 +491,26 @@ curl -X GET "https://skymail.ink/api/user/list?num=1&size=50" \
 }
 ```
 
-### 添加用户
+### Thêm người dùng
 
-**接口说明**：管理员添加用户，邮箱域名必须是已配置的邮箱域名，密码至少 6 位
+**Mô tả API**: Quản trị viên thêm người dùng, tên miền email phải là tên miền đã cấu hình, mật khẩu tối thiểu 6 ký tự
 
-**接口地址**：`POST /api/user/add`
+**Đường dẫn API**: `POST /api/user/add`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数       | 类型      | 默认值 | 必填  | 说明                           |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | -------- | ------- | --- | --- | ---------------------------- |
-| email    | string  |     | 是   | 完整邮箱地址，例如 `user@example.com` |
-| password | string  |     | 是   | 密码，至少 6 位                    |
+| email | string | | Có | Địa chỉ email đầy đủ, ví dụ `user@example.com` |
+| password | string | | Có | Mật khẩu, tối thiểu 6 ký tự |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X POST "https://skymail.ink/api/user/add" \
@@ -522,7 +522,7 @@ curl -X POST "https://skymail.ink/api/user/add" \
   }'
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -532,26 +532,26 @@ curl -X POST "https://skymail.ink/api/user/add" \
 }
 ```
 
-### 修改状态
+### Đổi trạng thái
 
-**接口说明**：启用或禁用用户，禁用后该用户所有登录会话会失效
+**Mô tả API**: Bật hoặc khóa người dùng; sau khi khóa, toàn bộ phiên đăng nhập của người dùng sẽ bị vô hiệu
 
-**接口地址**：`PUT /api/user/setStatus`
+**Đường dẫn API**: `PUT /api/user/setStatus`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数     | 类型      | 默认值 | 必填  | 说明              |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | ------ | ------- | --- | --- | --------------- |
-| userId | integer |     | 是   | 用户 id           |
-| status | integer |     | 是   | 用户状态（0 正常，1 禁用） |
+| userId | integer | | Có | ID người dùng |
+| status | integer | | Có | Trạng thái người dùng (0: bình thường, 1: bị khóa) |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X PUT "https://skymail.ink/api/user/setStatus" \
@@ -563,7 +563,7 @@ curl -X PUT "https://skymail.ink/api/user/setStatus" \
   }'
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -573,32 +573,32 @@ curl -X PUT "https://skymail.ink/api/user/setStatus" \
 }
 ```
 
-### 删除用户
+### Xóa người dùng
 
-**接口说明**：永久删除用户及其邮箱、邮件、星标和第三方登录绑定，不可恢复
+**Mô tả API**: Xóa vĩnh viễn người dùng cùng các hộp thư, email, dấu sao và liên kết đăng nhập bên thứ ba, không thể khôi phục
 
-**接口地址**：`DELETE /api/user/delete`
+**Đường dẫn API**: `DELETE /api/user/delete`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数      | 类型     | 默认值 | 必填  | 说明              |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | ------- | ------ | --- | --- | --------------- |
-| userIds | string |     | 是   | 用户 id，多个用英文逗号分隔 |
+| userIds | string | | Có | ID người dùng, nhiều ID phân cách bằng dấu phẩy |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X DELETE "https://skymail.ink/api/user/delete?userIds=1,2" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -608,42 +608,42 @@ curl -X DELETE "https://skymail.ink/api/user/delete?userIds=1,2" \
 }
 ```
 
-## 管理-邮件列表
+## Quản trị viên - Tất cả thư
 
-### 邮件列表
+### Danh sách email
 
-**接口说明**：查询全部用户的邮件，使用 `emailId` 游标分页，可按类型、发件人、主题、用户邮箱、收发邮箱筛选
+**Mô tả API**: Truy vấn email của toàn bộ người dùng, sử dụng phân trang con trỏ `emailId`, có thể lọc theo loại thư, người gửi, chủ đề, email người dùng, email gửi/nhận
 
-**接口地址**：`GET /api/allEmail/list`
+**Đường dẫn API**: `GET /api/allEmail/list`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数           | 类型      | 默认值       | 必填  | 说明                                                              |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | ------------ | ------- | --------- | --- | --------------------------------------------------------------- |
-| emailId      | integer |           | 否   | 游标邮件 id，首次查询可不传。`timeSort` 为 0 时查更早的邮件，为 1 时查更晚的邮件              |
-| size         | integer | 10        | 否   | 每页数量，最大 50                                                      |
-| timeSort     | integer |           | 否   | 时间排序（0 最新，1 最旧）                                                 |
-| type         | string  | `receive` | 否   | 邮件类型（`all` 全部，`receive` 收件，`send` 发件，`delete` 已删除，`noone` 无人收件） |
-| name         | string  |           | 否   | 发件人名字，前缀模糊匹配                                                    |
-| subject      | string  |           | 否   | 邮件主题，前缀模糊匹配                                                     |
-| userEmail    | string  |           | 否   | 所属用户邮箱，前缀模糊匹配                                                   |
-| accountEmail | string  |           | 否   | 发件人或收件人邮箱，前缀模糊匹配                                                |
-| full         | integer | 1         | 否   | 是否返回完整字段（0 摘要，1 完整正文和附件）                                        |
+| emailId | integer | | Không | ID email con trỏ, lần đầu có thể bỏ qua. Khi `timeSort` = 0 sẽ lấy email cũ hơn, khi = 1 sẽ lấy email mới hơn |
+| size | integer | 10 | Không | Số lượng mỗi trang, tối đa 50 |
+| timeSort | integer | | Không | Sắp xếp thời gian (0: mới nhất, 1: cũ nhất) |
+| type | string | `receive` | Không | Loại email (`all`: tất cả, `receive`: nhận, `send`: gửi, `delete`: đã xóa, `noone`: không người nhận) |
+| name | string | | Không | Tên người gửi, tìm kiếm mờ theo tiền tố |
+| subject | string | | Không | Tiêu đề email, tìm kiếm mờ theo tiền tố |
+| userEmail | string | | Không | Email của người dùng sở hữu, tìm kiếm mờ theo tiền tố |
+| accountEmail | string | | Không | Email người gửi hoặc người nhận, tìm kiếm mờ theo tiền tố |
+| full | integer | 1 | Không | Có trả về đầy đủ các trường hay không (0: tóm tắt, 1: đầy đủ nội dung và tệp đính kèm) |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X GET "https://skymail.ink/api/allEmail/list?type=receive&size=10" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -652,31 +652,31 @@ curl -X GET "https://skymail.ink/api/allEmail/list?type=receive&size=10" \
   "data": {
     "total": 1,
     "latestEmail": {
-      "emailId": 999,                         // 最新一封收件 id，用于轮询刷新
+      "emailId": 999,                         // ID email mới nhất nhận được, dùng để polling làm mới
       "accountId": 1,
       "userId": 1
     },
     "list": [
       {
-        "emailId": 999,                       // 邮件 id
-        "sendEmail": "hello@example.com",     // 发件人邮箱
-        "name": "hello",                      // 发件人名字
-        "subject": "Hello word",              // 邮件主题
-        "toEmail": "admin@example.com",       // 收件人邮箱
-        "toName": "admin",                    // 收件人名字
-        "userEmail": "admin@example.com",     // 所属用户邮箱
-        "accountId": 1,                       // 邮箱账号 id
-        "userId": 1,                          // 所属用户 id
-        "type": 0,                            // 邮件类型（0 收件，1 发件）
-        "status": 0,                          // 邮件状态（0 收件，1 已发送，2 已送达，3 退信，4 投诉，5 延迟，6 保存中，7 无人收件，8 失败）
-        "unread": 0,                          // 是否未读（0 未读，1 已读）
-        "isDel": 0,                           // 是否删除（0 正常，1 已删除）
-        "content": "<div>Hello word</div>",   // 邮件 HTML，full=1 时返回
-        "text": "Hello word",                 // 邮件纯文本
-        "cc": "[]",                           // 抄送
-        "bcc": "[]",                          // 密送
-        "createTime": "2099-12-30 23:59:59",  // 接收或发送时间（UTC）
-        "attList": [                          // 附件列表，full=1 时返回
+        "emailId": 999,                       // ID email
+        "sendEmail": "hello@example.com",     // Email người gửi
+        "name": "hello",                      // Tên người gửi
+        "subject": "Hello word",              // Tiêu đề email
+        "toEmail": "admin@example.com",       // Email người nhận
+        "toName": "admin",                    // Tên người nhận
+        "userEmail": "admin@example.com",     // Email của người dùng sở hữu
+        "accountId": 1,                       // ID hộp thư email
+        "userId": 1,                          // ID người dùng sở hữu
+        "type": 0,                            // Loại email (0: nhận, 1: gửi)
+        "status": 0,                          // Trạng thái email (0: nhận, 1: đã gửi, 2: đã chuyển giao, 3: bị trả lại, 4: khiếu nại, 5: trễ, 6: đang lưu, 7: không người nhận, 8: thất bại)
+        "unread": 0,                          // Trạng thái đọc (0: chưa đọc, 1: đã đọc)
+        "isDel": 0,                           // Trạng thái xóa (0: bình thường, 1: đã xóa)
+        "content": "<div>Hello word</div>",   // Nội dung HTML email, trả về khi full=1
+        "text": "Hello word",                 // Nội dung văn bản thuần của email
+        "cc": "[]",                           // Đồng kính gửi (CC)
+        "bcc": "[]",                          // Đồng kính gửi ẩn (BCC)
+        "createTime": "2099-12-30 23:59:59",  // Thời gian nhận hoặc gửi (UTC)
+        "attList": [                          // Danh sách tệp đính kèm, trả về khi full=1
           {
             "attId": 1,
             "filename": "file.txt",
@@ -690,32 +690,32 @@ curl -X GET "https://skymail.ink/api/allEmail/list?type=receive&size=10" \
 }
 ```
 
-### 删除邮件
+### Xóa email
 
-**接口说明**：永久删除指定邮件及其附件、星标，不可恢复
+**Mô tả API**: Xóa vĩnh viễn email đã chỉ định cùng tệp đính kèm và dấu sao, không thể khôi phục
 
-**接口地址**：`DELETE /api/allEmail/delete`
+**Đường dẫn API**: `DELETE /api/allEmail/delete`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数       | 类型     | 默认值 | 必填  | 说明              |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | -------- | ------ | --- | --- | --------------- |
-| emailIds | string |     | 是   | 邮件 id，多个用英文逗号分隔 |
+| emailIds | string | | Có | ID email, nhiều ID phân cách bằng dấu phẩy |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X DELETE "https://skymail.ink/api/allEmail/delete?emailIds=1,2" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -725,34 +725,34 @@ curl -X DELETE "https://skymail.ink/api/allEmail/delete?emailIds=1,2" \
 }
 ```
 
-## 管理-注册码
+## Quản trị viên - Mã mời
 
-### 注册码列表
+### Danh sách mã mời
 
-**接口说明**：查询全部注册码，可按注册码前缀筛选。已过期的注册码 `expireTime` 返回 `null`
+**Mô tả API**: Truy vấn toàn bộ mã mời, có thể lọc theo tiền tố mã mời. Mã mời đã hết hạn sẽ có `expireTime` trả về `null`
 
-**接口地址**：`GET /api/regKey/list`
+**Đường dẫn API**: `GET /api/regKey/list`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数   | 类型     | 默认值 | 必填  | 说明         |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | ---- | ------ | --- | --- | ---------- |
-| code | string |     | 否   | 注册码，前缀模糊匹配 |
+| code | string | | Không | Mã mời, tìm kiếm mờ theo tiền tố |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X GET "https://skymail.ink/api/regKey/list?code=Ab12" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -760,41 +760,41 @@ curl -X GET "https://skymail.ink/api/regKey/list?code=Ab12" \
   "message": "success",
   "data": [
     {
-      "regKeyId": 1,                          // 注册码 id
-      "code": "Ab12Cd34",                     // 注册码
-      "count": 10,                            // 剩余使用次数
-      "roleId": 1,                            // 权限身份 id
-      "roleName": "普通用户",                  // 权限身份名
-      "userId": 1,                            // 创建人用户 id
-      "expireTime": "2099-12-30 00:00:00",    // 有效期，已过期为 null
-      "createTime": "2099-12-30 23:59:59"     // 创建时间
+      "regKeyId": 1,                          // ID mã mời
+      "code": "Ab12Cd34",                     // Mã mời
+      "count": 10,                            // Số lượt sử dụng còn lại
+      "roleId": 1,                            // ID vai trò quyền hạn
+      "roleName": "Người dùng thông thường",  // Tên vai trò quyền hạn
+      "userId": 1,                            // ID người dùng tạo
+      "expireTime": "2099-12-30 00:00:00",    // Thời hạn hiệu lực, đã hết hạn là null
+      "createTime": "2099-12-30 23:59:59"     // Thời gian tạo
     }
   ]
 }
 ```
 
-### 添加注册码
+### Thêm mã mời
 
-**接口说明**：创建注册码。注册码不能重复，使用该注册码注册的用户会获得对应权限身份
+**Mô tả API**: Tạo mã mời. Mã mời không được trùng lặp, người dùng đăng ký bằng mã mời này sẽ nhận được vai trò quyền hạn tương ứng
 
-**接口地址**：`POST /api/regKey/add`
+**Đường dẫn API**: `POST /api/regKey/add`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数         | 类型      | 默认值 | 必填  | 说明                  |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | ---------- | ------- | --- | --- | ------------------- |
-| code       | string  |     | 是   | 注册码                 |
-| roleId     | integer |     | 是   | 权限身份 id             |
-| count      | integer |     | 是   | 可使用次数               |
-| expireTime | string  |     | 是   | 有效期，例如 `2099-12-30` |
+| code | string | | Có | Mã mời |
+| roleId | integer | | Có | ID vai trò quyền hạn |
+| count | integer | | Có | Số lượt có thể sử dụng |
+| expireTime | string | | Có | Thời hạn hiệu lực, ví dụ `2099-12-30` |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X POST "https://skymail.ink/api/regKey/add" \
@@ -808,7 +808,7 @@ curl -X POST "https://skymail.ink/api/regKey/add" \
   }'
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -818,32 +818,32 @@ curl -X POST "https://skymail.ink/api/regKey/add" \
 }
 ```
 
-### 使用记录
+### Lịch sử sử dụng
 
-**接口说明**：查询使用该注册码完成注册的用户列表
+**Mô tả API**: Truy vấn danh sách người dùng đã hoàn tất đăng ký bằng mã mời này
 
-**接口地址**：`GET /api/regKey/history`
+**Đường dẫn API**: `GET /api/regKey/history`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数       | 类型      | 默认值 | 必填  | 说明     |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | -------- | ------- | --- | --- | ------ |
-| regKeyId | integer |     | 是   | 注册码 id |
+| regKeyId | integer | | Có | ID mã mời |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X GET "https://skymail.ink/api/regKey/history?regKeyId=1" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {
@@ -851,39 +851,39 @@ curl -X GET "https://skymail.ink/api/regKey/history?regKeyId=1" \
   "message": "success",
   "data": [
     {
-      "email": "user@example.com",            // 注册用户邮箱
-      "createTime": "2099-12-30 23:59:59"     // 注册时间
+      "email": "user@example.com",            // Email người dùng đăng ký
+      "createTime": "2099-12-30 23:59:59"     // Thời gian đăng ký
     }
   ]
 }
 ```
 
-### 删除注册码
+### Xóa mã mời
 
-**接口说明**：删除指定注册码
+**Mô tả API**: Xóa mã mời đã chỉ định
 
-**接口地址**：`DELETE /api/regKey/delete`
+**Đường dẫn API**: `DELETE /api/regKey/delete`
 
-#### 请求头
+#### Header yêu cầu
 
-| Header        | 必填 | 说明     |
+| Header | Bắt buộc | Mô tả |
 | ------------- | ---- | -------- |
-| Authorization | 是   | 身份令牌 |
+| Authorization | Có | Token xác thực |
 
-#### 请求参数
+#### Tham số yêu cầu
 
-| 参数        | 类型     | 默认值 | 必填  | 说明               |
+| Tham số | Loại | Mặc định | Bắt buộc | Mô tả |
 | --------- | ------ | --- | --- | ---------------- |
-| regKeyIds | string |     | 是   | 注册码 id，多个用英文逗号分隔 |
+| regKeyIds | string | | Có | ID mã mời, nhiều ID phân cách bằng dấu phẩy |
 
-#### 请求示例
+#### Ví dụ yêu cầu
 
 ```bash
 curl -X DELETE "https://skymail.ink/api/regKey/delete?regKeyIds=1,2" \
   -H "Authorization: YOUR_TOKEN"
 ```
 
-#### 返回示例
+#### Ví dụ phản hồi
 
 ```json
 {

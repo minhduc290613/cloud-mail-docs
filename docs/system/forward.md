@@ -1,26 +1,26 @@
-# 邮件转发
+# Chuyển tiếp email
 
-## 转发到TG
+## Chuyển tiếp đến Telegram
 
-1. 在TG找到这个人
+1. Tìm bot `@BotFather` trên Telegram
 <img src="../public/images/forward/1.png" class="article-img">
 
-2.  创建机器人，复制Token
+2. Tạo bot mới và sao chép Bot Token
 <img src="../public/images/forward/2.png" class="article-img">
 
-3.  给机器人发消息
+3. Nhắn tin cho bot vừa tạo (bấm Start và gửi 1 tin nhắn)
 <img src="../public/images/forward/3.png" class="article-img">
 
-4. 浏览器输入 `https://api.telegram.org/bot`你的机器Token`/getUpdates` 获取chat_id，如果获取不到就再给机器人发几条消息
+4. Mở trình duyệt và truy cập `https://api.telegram.org/bot<TOKEN_BOT_CUA_BAN>/getUpdates` để lấy `chat_id`. Nếu chưa thấy, hãy gửi thêm vài tin nhắn cho bot rồi tải lại trang.
 <img src="../public/images/forward/4.png" class="article-img">
 
-5. 系统设置
+5. Cài đặt trong hệ thống Cloud Mail
 <img src="../public/images/forward/5.png" class="article-img">
 
-## 转发到其他邮箱
+## Chuyển tiếp đến hộp thư khác
 
-1. 在Cloudflare验证
+1. Xác minh địa chỉ email nhận trên Cloudflare
 <img src="../public/images/forward/6.png" class="article-img">
 
-2. 系统设置
+2. Cài đặt trong hệ thống Cloud Mail
 <img src="../public/images/forward/7.png" class="article-img">

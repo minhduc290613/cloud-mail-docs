@@ -1,70 +1,66 @@
-# 部署教程
+# Hướng dẫn triển khai bằng dòng lệnh
 
-## 部署准备
+## Chuẩn bị triển khai
 
-Nodejs v20.19.6
+- Node.js v20.19.6 trở lên
+- Tài khoản Cloudflare (đã liên kết tên miền)
 
-Cloudflare 账号 (需要绑定域名)
-
-
-**克隆项目到本地**
-``` shell
-git clone https://github.com/maillab/cloud-mail #拉取代码
-cd cloud-mail/mail-worker #进入worker目录
+**Sao chép mã nguồn về máy**
+```shell
+git clone https://github.com/maillab/cloud-mail # Kéo mã nguồn
+cd cloud-mail/mail-worker # Di chuyển vào thư mục worker
 ```
 
-**安装依赖**
+**Cài đặt các gói phụ thuộc**
 ```shell
 pnpm i
 ```
 
-## 项目配置 
+## Cấu hình dự án 
 
-mail-worker/wrangler.toml
+Tệp `mail-worker/wrangler.toml`
 
 ```toml
 [[d1_databases]]
-binding = "db"			#d1数据库绑定名默认不可修改
-database_name = ""		#d1数据库名字
-database_id = ""		#d1数据库id
+binding = "db"			# Tên binding cơ sở dữ liệu D1 (mặc định không được sửa)
+database_name = ""		# Tên cơ sở dữ liệu D1
+database_id = ""		# ID cơ sở dữ liệu D1
 
 [[kv_namespaces]]
-binding = "kv"			#kv绑定名默认不可修改
-id = ""			        #kv数据库id
+binding = "kv"			# Tên binding KV (mặc định không được sửa)
+id = ""			        # ID không gian tên KV
 
 
 [[r2_buckets]]
-binding = "r2"                  #r2对象存储绑定名默认不可修改
-bucket_name = ""	        #r2对象存储桶的名字
+binding = "r2"                  # Tên binding lưu trữ đối tượng R2 (mặc định không được sửa)
+bucket_name = ""	        # Tên bucket lưu trữ đối tượng R2
 	
 
 [assets]
-binding = "assets"		#静态资源绑定名默认不可修改
-directory = "./dist"	        #前端vue项目打包的静态资源存放位置,默认dist
+binding = "assets"		# Tên binding tài nguyên tĩnh (mặc định không được sửa)
+directory = "./dist"	        # Thư mục chứa tài nguyên tĩnh đã build của dự án Vue, mặc định là dist
 
 [triggers]
-crons = ["0 16 * * *"]	#定时任务每天晚上12点执行（Asia/Shanghai）
+crons = ["0 16 * * *"]	# Cron job thực thi hàng ngày lúc 00:00 (Asia/Shanghai)
 
 [vars]
 orm_log = false
-domain = []			#邮件域名可以配置多个示例: ["example1.com","example2.com"]
-admin = ""		        #管理员的邮箱 示例: "admin@example.com"
-jwt_secret = ""			#登录身份令牌的密钥,随便填一串字符串
+domain = []			# Danh sách tên miền email có thể cấu hình nhiều tên miền, ví dụ: ["example1.com","example2.com"]
+admin = ""		        # Địa chỉ email của quản trị viên, ví dụ: "admin@example.com"
+jwt_secret = ""			# Chuỗi bí mật JWT xác thực đăng nhập, nhập chuỗi ký tự bất kỳ
 
 ```
 
+## Triển khai từ xa
 
-
-## 远程部署
-
-1. 在 Cloudflare 控制台创建KV，D1数据库
-2. 在项目目录 `mail-worker/wrangler.toml` 配置数据库和环境变量
-3. 执行远程部署命令
+1. Tạo cơ sở dữ liệu KV, D1 trên bảng điều khiển Cloudflare.
+2. Cấu hình cơ sở dữ liệu và biến môi trường trong tệp `mail-worker/wrangler.toml`.
+3. Chạy lệnh triển khai từ xa:
 
     ```shell
     pnpm run deploy 
     ```
 
-4. 在Cloudflare→账户主页→你的域名→电子邮件→电子邮件路由→路由规则→Catch-all地址，编辑发送到worker
+4. Vào Cloudflare → Trang chủ tài khoản → Tên miền của bạn → Email → Định tuyến email (Email Routing) → Quy tắc định tuyến (Routing Rules) → Địa chỉ Catch-all, chỉnh sửa hành động gửi đến Worker.
 
-5. 浏览器输入  `https://worker自定义域/api/init/你的jwt_secret`   初始化或更新数据库
+5. Mở trình duyệt và truy cập `https://<ten-mien-tuy-chinh-worker>/api/init/<jwt_secret_cua_ban>` để khởi tạo hoặc cập nhật cơ sở dữ liệu.

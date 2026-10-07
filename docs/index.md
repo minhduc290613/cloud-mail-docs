@@ -5,34 +5,34 @@ layout: home
 hero:
   name: "Cloud Mail"
   text: ""
-  tagline: "基于 Cloudflare 的简约响应式邮箱服务，支持邮件发送、附件收发，部署到 Worker 降低服务器成本 🎉"
+  tagline: "Dịch vụ email responsive đơn giản dựa trên Cloudflare, hỗ trợ gửi email, gửi và nhận tệp đính kèm và được triển khai cho Worker để giảm chi phí máy chủ 🎉"
   actions:
     - theme: brand
-      text: 在线演示
-      link:  https://skymail.ink
+      text: Bản demo trực tuyến
+      link:  https://mail.vandekn.qzz.io
     - theme: alt
-      text: 界面部署
+      text: Triển khai giao diện
       link: /guide/dashboard.md
     - theme: alt
-      text: Action 部署
+      text: Triển khai action
       link: /guide/action.md
 
 features:
-  - title: 💰 低成本使用
-    details: 部署到 Cloudflare Workers 降低服务器成本
-  - title: 📧 邮件发送
-    details: 集成 Resend 发送邮件，支持群发，内嵌图片和附件发送，状态查看
-  - title: 📈 数据可视化
-    details: 使用 Echarts 对系统数据详情，用户邮件增长可视化显示
-  - title: 🛡️ 管理员功能
-    details: 可以对用户，邮件进行管理，RABC权限控制对功能及使用资源限制
-  - title: 🔀 多号模式
-    details: 开启后多号模式后可以一个用户可以添加多个邮箱
-  - title: 📦 附件收发
-    details: 支持收发附件，使用R2对象存储保存和下载文件
-  - title: 🎨 个性化设置
-    details: 可以自定义网站标题，登录背景，透明度
-  - title: 🤖 人机验证
-    details: 集成 Turnstile 人机验证，防止人机批量注册
+  - title: 💰 Chi phí sử dụng thấp
+    details: Triển khai lên Cloudflare Workers để giảm chi phí máy chủ
+  - title: 📧 Gửi qua email
+    details: Tích hợp Resend gửi email, hỗ trợ gửi số lượng lớn, gửi hình ảnh và tệp đính kèm nội tuyến, theo dõi trạng thái
+  - title: 📈 trực quan hóa dữ liệu
+    details: Sử dụng Echarts trực quan hóa dữ liệu hệ thống chi tiết, hiển thị số lượng email của người dùng tăng trưởng một cách trực quan
+  - title: 🛡️ Chức năng quản trị viên
+    details: Có thể được quản lý, Kiểm soát quyền RABC đối với chức năng và tài nguyên sử dụng
+  - title: 🔀 Nhiều tài khoản
+    details: Sau khi bật, một người dùng có thể thêm nhiều tài khoản email
+  - title: 📦 Gửi và nhận tệp đính kèm
+    details: Hỗ trợ gửi và nhận tệp đính kèm, sử dụng R2 object storage để lưu trữ và tải xuống tệp
+  - title: 🎨 Cài đặt cá nhân hóa
+    details: Có thể tùy chỉnh tiêu đề trang web, nền đăng nhập, độ trong suốt
+  - title: 🤖 Xác minh người máy
+    details: Tích hợp xác minh người máy Turnstile để ngăn chặn việc đăng ký hàng loạt
 ---
 

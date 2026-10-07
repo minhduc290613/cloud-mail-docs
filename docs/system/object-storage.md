@@ -1,21 +1,20 @@
-# 对象存储
+# Lưu trữ đối tượng (Object Storage)
 
 :::warning
-邮件附件默认使用KV存储，可以切改为R2或其他S3协议存储
+Tệp đính kèm email mặc định sử dụng lưu trữ KV, bạn có thể chuyển sang sử dụng R2 hoặc bất kỳ dịch vụ lưu trữ nào tương thích giao thức S3.
 :::
 
-
-1. 创建R2对象存储桶
+1. Tạo bucket lưu trữ đối tượng R2
 <img src="../public/images/r2/1.png" class="article-img">
 
-2. 设置自定义域名
+2. Cài đặt tên miền tùy chỉnh (Custom Domain)
 <img src="../public/images/r2/2.png" class="article-img">
 
-3. 添加到Action Secret 或 Worker <span style='color: red'>绑定</span>
+3. Thêm vào Action Secret hoặc Worker <span style='color: red'>Binding</span>
 
-| Worker 绑定名称 | Action Secret  | 必需 | 用途    |
-|-------------|---------------------| :--: |-------|
-| r2          | R2_BUCKET_NAME      |  ✅  | R2桶名称 |
+| Tên Worker Binding | Action Secret | Bắt buộc | Mục đích sử dụng |
+|---|---|:---:|---|
+| r2 | R2_BUCKET_NAME | ✅ | Tên bucket R2 |
 
-4. 系统设置
+4. Cài đặt hệ thống
 <img src="../public/images/r2/3.png" class="article-img">

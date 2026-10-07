@@ -1,8 +1,3 @@
-# 项目介绍
+# Giới thiệu dự án
 
-
-
-
-
-只需要一个域名，就可以创建多个不同的邮箱，类似各大邮箱平台，本项目可部署到 Cloudflare Workers ，降低服务器成本，搭建自己的邮箱服务
-
+Chỉ cần một tên miền, bạn có thể tạo nhiều địa chỉ email khác nhau tương tự các nền tảng email lớn. Dự án này có thể triển khai lên Cloudflare Workers để giảm chi phí máy chủ và xây dựng dịch vụ email riêng của bạn.

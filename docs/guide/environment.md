@@ -1,7 +1,7 @@
-# 其他变量
+# Biến môi trường khác
 
-| Worker Secret      | Action Secret        | 默认                             | 必需  | 用途                              |
-|--------------------|----------------------|--------------------------------|:---:|---------------------------------|
-| ai_model  | AI_MODEL             | @cf/meta/llama-3.1-8b-instruct |   ❌ | AI模型                            |
-| analysis_cache | ANALYSIS_CACHE       | false                          |  ❌  | 开启分析页数据缓存   (true开启 false关闭)    |
-| project_link     | PROJECT_LINK         | true                           |  ❌  | 隐藏登录界面GitHub图标 (true显示 false隐藏) |
+| Worker Secret | Action Secret | Mặc định | Bắt buộc | Mục đích sử dụng |
+|---|---|---|:---:|---|
+| ai_model | AI_MODEL | @cf/meta/llama-3.1-8b-instruct | ❌ | Mô hình AI |
+| analysis_cache | ANALYSIS_CACHE | false | ❌ | Bật bộ nhớ đệm dữ liệu trang phân tích (true: bật, false: tắt) |
+| project_link | PROJECT_LINK | true | ❌ | Ẩn biểu tượng GitHub ở giao diện đăng nhập (true: hiển thị, false: ẩn) |

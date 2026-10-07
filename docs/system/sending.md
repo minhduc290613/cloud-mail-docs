@@ -1,19 +1,20 @@
-# 邮件发送
+# Gửi email
+
 :::warning
-Cloudflare 目前不支持发件，封禁25端口，只能使用第三方服务
+Cloudflare hiện không hỗ trợ gửi thư trực tiếp (chặn cổng 25), vì vậy phải sử dụng dịch vụ của bên thứ ba (như Resend).
 :::
 
-1. [注册Resend](https://resend.com/login)，并添加域名，完成DNS验证
+1. [Đăng ký tài khoản Resend](https://resend.com/login), thêm tên miền và hoàn tất xác thực DNS
 <img src="../public/images/send/1.png" class="article-img">
 
-2.  创建 API Key 并复制
+2. Tạo API Key và sao chép
 <img src="../public/images/send/3.png" class="article-img">
 
-3. 设置发送状态回调 `https://worker自定义域/api/webhooks`
+3. Cài đặt Webhook nhận trạng thái gửi thư: `https://<ten-mien-tuy-chinh-worker>/api/webhooks`
 <img src="../public/images/send/2.png" class="article-img">
 
-4. 选择对应选项
+4. Chọn các sự kiện tương ứng
 <img src="../public/images/send/4.png" class="article-img">
 
-5. 系统设置
+5. Cài đặt trong hệ thống Cloud Mail
 <img src="../public/images/send/5.png" class="article-img">

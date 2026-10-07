@@ -1,3 +1,3 @@
-- 💬 讨论社区：[Telegram](https://t.me/cloud_mail_tg)
-- 📧 邮箱：eoao@skymail.ink
+- 💬 Contact：[Telegram](https://t.me/minhduc290613)
+- 📧 Email：[support@mail.protechvn.io.vn](mailto:support@mail.protechvn.io.vn)
 

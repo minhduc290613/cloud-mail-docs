@@ -4,7 +4,7 @@
 
 [Đăng ký Cloudflare](https://dash.cloudflare.com/) và thêm tên miền của bạn.
 
-Nếu chưa biết cách trỏ tên miền, bạn có thể xem hướng dẫn: [Trỏ tên miền về Cloudflare](https://cloud.tencent.cn/developer/article/2518586?from=15425&policyId=undefined&traceId=&frompage=seopage)
+Nếu chưa biết cách trỏ tên miền, bạn có thể xem hướng dẫn: [Trỏ tên miền về Cloudflare](https://helpdesk.inet.vn/knowledgebase/huong-dan-tro-ten-mien-inet-qua-cloudflare)
 <img src="../public/images/action/1.png" class="article-img">
 
 

@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Live Demo
-      link:  https://skymail.ink
+      link:  https://mail.vandekn.qzz.io
     - theme: alt
       text: Dashboard Deployment
       link: /en/guide/dashboard.md

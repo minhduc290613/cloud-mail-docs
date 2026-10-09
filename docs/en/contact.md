@@ -1,2 +1,2 @@
-- 💬 Discussion Community: [Telegram](https://t.me/cloud_mail_tg)
-- 📧 Email: admin@skymail.ink
+- 💬 Discussion Community: [Telegram](https://t.me/minhduc290613)
+- 📧 Email: support@mail.protechvn.io.vn

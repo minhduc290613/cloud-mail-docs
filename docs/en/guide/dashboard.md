@@ -2,7 +2,7 @@
 
 ## Create the Project
 
-1. Fork or clone the repository to your own GitHub account: [https://github.com/maillab/cloud-mail](https://github.com/maillab/cloud-mail)
+1. Fork or clone the repository to your own GitHub account: [https://github.com/minhduc290613/cloud-mail](https://github.com/minhduc290613/cloud-mail)
 
 <img src="../../public/images/dashboard/0.png" class="article-img" />
 

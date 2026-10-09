@@ -7,7 +7,7 @@
 
 **Sao chép mã nguồn về máy**
 ```shell
-git clone https://github.com/maillab/cloud-mail # Kéo mã nguồn
+git clone https://github.com/minhduc290613/cloud-mail # Kéo mã nguồn
 cd cloud-mail/mail-worker # Di chuyển vào thư mục worker
 ```
 

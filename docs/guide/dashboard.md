@@ -9,7 +9,7 @@ Nếu chưa biết cách trỏ tên miền, bạn có thể xem hướng dẫn: 
 
 
 ## Tạo dự án
-1. Fork kho lưu trữ về tài khoản GitHub của bạn [https://github.com/maillab/cloud-mail](https://github.com/maillab/cloud-mail)
+1. Fork kho lưu trữ về tài khoản GitHub của bạn [https://github.com/minhduc290613/cloud-mail](https://github.com/minhduc290613/cloud-mail)
 <img src="../public/images/dashboard/0.png" class="article-img" />
 2. Tạo dự án Worker trên Cloudflare
 <img src="../public/images/dashboard/1.png" class="article-img" />

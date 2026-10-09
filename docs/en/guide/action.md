@@ -13,7 +13,7 @@
 
 ## Environment Setup
 
-1. Fork the repository: [https://github.com/maillab/cloud-mail](https://github.com/maillab/cloud-mail)
+1. Fork the repository: [https://github.com/minhduc290613/cloud-mail](https://github.com/minhduc290613/cloud-mail)
    <img src="../../public/images/action/8.png" class="article-img">
 
 2. Configure GitHub Actions secrets.

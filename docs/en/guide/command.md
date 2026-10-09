@@ -9,7 +9,7 @@ A Cloudflare account (a domain must be added to the account)
 
 **Clone the project locally**
 ``` shell
-git clone https://github.com/maillab/cloud-mail
+git clone https://github.com/minhduc290613/cloud-mail
 cd cloud-mail/mail-worker
 ```
 
